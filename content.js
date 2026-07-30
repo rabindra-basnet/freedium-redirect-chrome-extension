@@ -40,12 +40,25 @@
       textDecoration: "none",
       transition: "background 0.1s",
       boxSizing: "border-box",
+      opacity: "1",
     });
-    btn.addEventListener("mouseenter", () => (btn.style.background = "#156d12"));
-    btn.addEventListener("mouseleave", () => (btn.style.background = "#1a8917"));
+    btn.addEventListener("mouseenter", () => {
+      if (btn.disabled) return;
+      btn.style.background = "#156d12";
+      btn.style.opacity = "0.85";
+    });
+    btn.addEventListener("mouseleave", () => {
+      btn.style.background = "#1a8917";
+      btn.style.opacity = "1";
+    });
     btn.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
+      btn.disabled = true;
+      btn.style.background = "#3a8a38";
+      btn.style.cursor = "default";
+      btn.style.opacity = "0.6";
+      btn.textContent = "Opening...";
       chrome.runtime.sendMessage({
         action: "openFreedium",
         url: "https://freedium-mirror.cfd/" + window.location.href
