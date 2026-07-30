@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Freedium Redirect",
+  "version": "1.0",
+  "description": "Adds a button on Medium articles to redirect to freedium-mirror.cfd for a cleaner reading experience.",
+  "permissions": [],
+  "host_permissions": ["https://medium.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://medium.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "Freedium Redirect",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}
