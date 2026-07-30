@@ -4,6 +4,9 @@
   "version": "1.0",
   "description": "Adds a button on Medium articles to redirect to freedium-mirror.cfd for a cleaner reading experience.",
   "permissions": ["activeTab"],
+  "background": {
+    "service_worker": "background.js"
+  },
   "host_permissions": ["<all_urls>"],
   "content_scripts": [
     {

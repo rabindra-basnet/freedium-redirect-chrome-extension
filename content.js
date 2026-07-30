@@ -34,8 +34,10 @@
   btn.addEventListener("mouseenter", () => (btn.style.opacity = "0.85"));
   btn.addEventListener("mouseleave", () => (btn.style.opacity = "1"));
   btn.addEventListener("click", () => {
-    window.location.href =
-      "https://freedium-mirror.cfd/" + window.location.href;
+    chrome.runtime.sendMessage({
+      action: "openFreedium",
+      url: "https://freedium-mirror.cfd/" + window.location.href
+    });
   });
 
   document.body.appendChild(btn);
