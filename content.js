@@ -10,35 +10,44 @@
 
   if (!isMediumPage) return;
 
-  const btn = document.createElement("button");
-  btn.id = "freedium-redirect-btn";
-  btn.textContent = "Read on Freedium";
-  Object.assign(btn.style, {
-    position: "fixed",
-    bottom: "24px",
-    right: "24px",
-    zIndex: "2147483647",
-    padding: "12px 20px",
-    background: "#1a8917",
-    color: "#fff",
-    border: "none",
-    borderRadius: "8px",
-    fontSize: "15px",
-    fontWeight: "600",
-    fontFamily: "system-ui, sans-serif",
-    cursor: "pointer",
-    boxShadow: "0 4px 16px rgba(0,0,0,0.25)",
-    transition: "opacity 0.2s",
-  });
+  function injectButton() {
+    const writeBtn = document.querySelector(
+      'a[href="https://medium.com/new-story"], ' +
+      'a[data-action="new-story"], ' +
+      'a[href*="/new-story"]'
+    );
+    if (!writeBtn || document.getElementById("freedium-redirect-btn")) return;
 
-  btn.addEventListener("mouseenter", () => (btn.style.opacity = "0.85"));
-  btn.addEventListener("mouseleave", () => (btn.style.opacity = "1"));
-  btn.addEventListener("click", () => {
-    chrome.runtime.sendMessage({
-      action: "openFreedium",
-      url: "https://freedium-mirror.cfd/" + window.location.href
+    const btn = document.createElement("button");
+    btn.id = "freedium-redirect-btn";
+    btn.textContent = "Read on Freedium";
+    Object.assign(btn.style, {
+      background: "none",
+      border: "none",
+      color: "rgb(26, 137, 23)",
+      cursor: "pointer",
+      fontSize: "14px",
+      fontWeight: "600",
+      fontFamily: "system-ui, sans-serif",
+      padding: "0 12px",
+      height: "100%",
+      whiteSpace: "nowrap",
     });
-  });
+    btn.addEventListener("mouseenter", () => (btn.style.opacity = "0.7"));
+    btn.addEventListener("mouseleave", () => (btn.style.opacity = "1"));
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      chrome.runtime.sendMessage({
+        action: "openFreedium",
+        url: "https://freedium-mirror.cfd/" + window.location.href
+      });
+    });
 
-  document.body.appendChild(btn);
+    writeBtn.parentNode.insertBefore(btn, writeBtn);
+  }
+
+  injectButton();
+  const observer = new MutationObserver(injectButton);
+  observer.observe(document.body, { childList: true, subtree: true });
 })();
