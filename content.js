@@ -1,9 +1,10 @@
 (function () {
-  const isMediumArticle =
-    /^https:\/\/medium\.com\/.+/.test(window.location.href) &&
-    !/\/\/(medium\.com|[\w-]+\.medium\.com)\/?$/.test(window.location.href);
+  const url = window.location.href;
+  const isMediumDomain = /^https:\/\/([\w-]+\.)?medium\.com\//.test(url);
+  const isArticle = isMediumDomain && !/\/\/([\w-]+\.)?medium\.com\/?$/.test(url);
+  const isCustomDomain = !isMediumDomain && document.querySelector('meta[name="medium"]');
 
-  if (!isMediumArticle) return;
+  if (!isArticle && !isCustomDomain) return;
 
   const btn = document.createElement("button");
   btn.id = "freedium-redirect-btn";

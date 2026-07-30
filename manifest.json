@@ -4,10 +4,16 @@
   "version": "1.0",
   "description": "Adds a button on Medium articles to redirect to freedium-mirror.cfd for a cleaner reading experience.",
   "permissions": [],
-  "host_permissions": ["https://medium.com/*"],
+  "host_permissions": [
+    "https://medium.com/*",
+    "https://*.medium.com/*"
+  ],
   "content_scripts": [
     {
-      "matches": ["https://medium.com/*"],
+      "matches": [
+        "https://medium.com/*",
+        "https://*.medium.com/*"
+      ],
       "js": ["content.js"],
       "run_at": "document_idle"
     }
