@@ -2,7 +2,11 @@
   const url = window.location.href;
   const isMediumDomain = /^https:\/\/([\w-]+\.)?medium\.com\//.test(url);
   const isArticle = isMediumDomain && !/\/\/([\w-]+\.)?medium\.com\/?$/.test(url);
-  const isMediumPage = isArticle || document.querySelector('meta[name="medium"], meta[property="al:android:app_name"][content="Medium"]');
+  const isMediumPage = isArticle || document.querySelector(
+    'meta[name="medium"], ' +
+    'meta[property="al:android:app_name"][content="Medium"], ' +
+    'meta[property="og:site_name"][content="Medium"]'
+  );
 
   if (!isMediumPage) return;
 
