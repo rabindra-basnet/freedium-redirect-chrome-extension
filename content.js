@@ -2,9 +2,9 @@
   const url = window.location.href;
   const isMediumDomain = /^https:\/\/([\w-]+\.)?medium\.com\//.test(url);
   const isArticle = isMediumDomain && !/\/\/([\w-]+\.)?medium\.com\/?$/.test(url);
-  const isCustomDomain = !isMediumDomain && document.querySelector('meta[name="medium"]');
+  const isMediumPage = isArticle || document.querySelector('meta[name="medium"], meta[property="al:android:app_name"][content="Medium"]');
 
-  if (!isArticle && !isCustomDomain) return;
+  if (!isMediumPage) return;
 
   const btn = document.createElement("button");
   btn.id = "freedium-redirect-btn";
