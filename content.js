@@ -22,16 +22,18 @@
     btn.id = "freedium-redirect-btn";
     btn.textContent = "Read on Freedium";
     Object.assign(btn.style, {
-      background: "none",
+      background: "#1a8917",
       border: "none",
-      color: "rgb(26, 137, 23)",
+      color: "#fff",
       cursor: "pointer",
-      fontSize: "14px",
+      fontSize: "13px",
       fontWeight: "600",
       fontFamily: "system-ui, sans-serif",
-      padding: "0 12px",
-      height: "100%",
+      padding: "5px 14px",
+      borderRadius: "99em",
+      height: "fit-content",
       whiteSpace: "nowrap",
+      lineHeight: "20px",
     });
     btn.addEventListener("mouseenter", () => (btn.style.opacity = "0.7"));
     btn.addEventListener("mouseleave", () => (btn.style.opacity = "1"));
