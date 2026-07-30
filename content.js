@@ -59,10 +59,16 @@
       btn.style.cursor = "default";
       btn.style.opacity = "0.6";
       btn.textContent = "Opening...";
-      chrome.runtime.sendMessage({
-        action: "openFreedium",
-        url: "https://freedium-mirror.cfd/" + window.location.href
-      });
+      chrome.runtime.sendMessage(
+        { action: "openFreedium", url: "https://freedium-mirror.cfd/" + window.location.href },
+        () => {
+          btn.disabled = false;
+          btn.style.background = "#1a8917";
+          btn.style.cursor = "pointer";
+          btn.style.opacity = "1";
+          btn.textContent = "Read on Freedium";
+        }
+      );
     });
 
     writeBtn.parentNode.insertBefore(btn, writeBtn);
