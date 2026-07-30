@@ -34,6 +34,7 @@
       height: "fit-content",
       whiteSpace: "nowrap",
       lineHeight: "20px",
+      marginRight: "8px",
     });
     btn.addEventListener("mouseenter", () => (btn.style.opacity = "0.7"));
     btn.addEventListener("mouseleave", () => (btn.style.opacity = "1"));
